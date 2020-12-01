@@ -1,0 +1,36 @@
+{% extends 'base_depapp.html' %}
+
+{% block title %}
+Emploees list
+{% endblock %}
+
+{% block content_title %}
+List of employees
+{% endblock %}
+
+{% block content %}
+	<form action="{% url 'employee_add_url' department_id=department_id %}">
+		<button type="submit" class="btn btn-info">Add new employee</button>
+	</form>
+	<form action="{% url 'department_list_url' %}">
+		<button type="submit" class="btn btn-info">Departments list</button>
+	</form>
+ 	<ol>
+ 		{% for employee in object_list %}
+ 		<li>{{ employee.first_name }} {{ employee.last_name }}
+ 		<p>
+			<form action="{% url 'employee_info_url' department_id=department_id employee_id=employee.id %}" target="_self">
+				<button type="submit" class="btn btn-secondary">Personal info</button>
+  			</form>
+			<form action="{% url 'employee_edit_url' department_id=department_id employee_id=employee.id %}">
+				<button type="submit" class="btn btn-secondary">Edit</button>
+  			</form>
+			<form action="{% url 'employee_delete_url' department_id=department_id employee_id=employee.id %}">
+   			<button type="submit" class="btn btn-secondary" value="Delete">Delete</button>
+			</form>
+		</p>
+ 		</li>
+		{% endfor %}
+ 	</ol>
+
+{% endblock %}

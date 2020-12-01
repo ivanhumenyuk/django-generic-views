@@ -1,0 +1,32 @@
+{% extends 'base_depapp.html' %}
+
+{% block title %}
+Index page
+{% endblock %}
+
+{% block content_title %}
+List of departments
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'department_create_url' %}">
+	<button type="submit" class="btn btn-info">Crate new department</button>
+</form>
+<ol>
+	{% for department in object_list %}
+	<li>{{ department.name }}
+		<p>
+			<form action="{% url 'employee_list_url' department_id=department.id %}">
+				<button type="submit" class="btn btn-secondary">List of employees</button>
+			</form>
+			<form action="{% url 'department_edit_url' department_id=department.id %}">
+				<button  type="submit" class="btn btn-secondary">Edit</button>
+			</form>
+			<form action="{% url 'department_delete_url' department_id=department.id %}">
+				<button type="submit" class="btn btn-secondary" value="Delete">Delete</button>
+			</form>
+		</p>
+	</li>
+	{% endfor %}
+</ol>
+{% endblock %}

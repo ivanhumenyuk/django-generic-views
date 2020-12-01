@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Employeee info
+{% endblock %}
+
+{% block content_title %}
+Personal information
+{% endblock %}
+
+{% block content %}
+<p><b>Personal name:</b></p>
+	<p>{{ object.first_name }} {{ object.last_name }}</p>
+<p><b>Age:</b></p> 
+	<p>{{ object.age }} y.o.</p>
+<p><b>Hire date:</b></p> 
+	<p>{{ object.hire_date }}</p>
+<p><b>E-mail:</b></p>
+	<p>{{ object.email }}</p>
+<form action="{% url 'employee_list_url' department_id=department_id %}">
+	<button type="submit" class="btn btn-info">Employees list</button>
+</form>
+{% endblock %}

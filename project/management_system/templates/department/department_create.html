@@ -1,0 +1,33 @@
+{% extends 'base_depapp.html' %}
+
+{% block title %}
+Create Department
+{% endblock %}
+
+{% block content_title %}
+New Department
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6">
+
+	<form action="{% url 'department_create_url' %}" method="post">
+		{% csrf_token %}
+		<div class="form-group">
+
+			{{ form.name.label }}
+			{{ form.name }}
+
+			{% if form.name.errors %}
+			{% for error in form.name.errors %}
+			<ul style="color: red">
+				<li>{{ error }}</li>
+			</ul>
+			{% endfor %}
+			{% endif %}
+		</div>
+
+		<button type="submit" class="btn btn-info">Create</button>
+	</form>
+</div>
+{% endblock %}

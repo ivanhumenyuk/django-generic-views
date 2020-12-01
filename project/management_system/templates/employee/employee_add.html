@@ -1,0 +1,43 @@
+{% extends 'base_depapp.html' %}
+
+{% block title %}
+New employee
+{% endblock %}
+
+{% block content_title %}
+New employee
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6">
+	<form action="{% url 'employee_add_url' department_id=department_id %}" method="post">
+
+		{% csrf_token %}
+
+		<div class="form-group">
+
+			{% for field in form.visible_fields %}
+
+			{{ field.label }}
+			{{ field }}
+
+			{% if field.errors %}
+			{% for error in field.errors %}
+			<ul style="color: red">
+				<li>{{ error }}</li>
+			</ul>
+			{% endfor %}
+			{% endif %}
+
+			{% endfor %}
+
+
+			{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+			{% endfor %}
+
+		</div>
+		<button type="submit" class="btn btn-info" value="Create">Create</button>
+	</form>
+</div>
+{% endblock %}
